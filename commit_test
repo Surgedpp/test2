@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     // Fibonacci numbers are calculated with unsigned long long
+    // to accommodate larger values.
     printf("Fibonacci numbers up to %ld:\n", n);
     unsigned long long a = 0, b = 1;
     for (long i = 0; i < n; ++i) {
