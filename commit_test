@@ -1,0 +1,34 @@
+// /home/pengpai/.vscode-server/commit_test.c
+// Simple program: print first N Fibonacci numbers (default N=10)
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+int main(int argc, char *argv[]) {
+    long n = 10;
+    if (argc > 1) {
+        char *end;
+        n = strtol(argv[1], &end, 10);
+        if (*end != '\0' || n <= 0) {
+            fprintf(stderr, "Usage: %s [positive-integer]\n", argv[0]);
+            return 1;
+        }
+    }
+
+    if (n > 93) { // prevent unsigned long long overflow
+        fprintf(stderr, "Max supported N is 93 to avoid overflow.\n");
+        return 1;
+    }
+    // Fibonacci numbers are calculated with unsigned long long
+    printf("Fibonacci numbers up to %ld:\n", n);
+    unsigned long long a = 0, b = 1;
+    for (long i = 0; i < n; ++i) {
+        printf("%2ld: %llu\n", i + 1, a);
+        unsigned long long next = a + b;
+        a = b;
+        b = next;
+    }
+
+    return 0;
+}
